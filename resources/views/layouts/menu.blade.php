@@ -12,18 +12,30 @@
 <li class="nav-item">
     <a href="{{route('home')}}" class="nav-link active">
         <i class="nav-icon fas fa-home"></i>
-        <p>Главная</p>
+        <p>Main page</p>
     </a>
     <a href="" class="nav-link active">
         <i class="nav-icon fas fa-city"></i>
-        <p>Города</p>
+        <p>Cities</p>
     </a>
     <a href="" class="nav-link active">
         <i class="nav-icon fas fa-city"></i>
         <p>Медицинские учреждения</p>
     </a>
-    <a href="" class="nav-link active">
-        <i class="nav-icon fas fa-users"></i>
-        <p>Сотрудники</p>
-    </a>
+    <form method="get" action="{{route('users.index')}}">
+        @csrf
+        <input type="hidden" value="2" name="type">
+        <button class="nav-link" type="submit">
+            <i class="nav-icon fas fa-users"></i>
+            Doctors
+        </button>
+    </form>
+    <form method="get" action="{{route('users.index')}}">
+        @csrf
+        <input type="hidden" value="3" name="type">
+        <button class="nav-link" type="submit">
+            <i class="nav-icon fas fa-users"></i>
+            Managers
+        </button>
+    </form>
 </li>
