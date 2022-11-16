@@ -55,7 +55,7 @@ class UserController extends Controller
             'user_role_id'  =>  $request['type'],
         ]);
 
-        return redirect()->route('users.index')
+        return redirect()->route('users.index', ['type' => $request['type']])
             ->with('success', 'User created successfully.');
     }
 
