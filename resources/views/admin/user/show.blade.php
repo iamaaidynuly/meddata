@@ -21,13 +21,47 @@
                     <div class="card-body">
 
                         <div class="form-group">
-                            <strong>Name:</strong>
-                            {{ $user->name }}
+                            <strong>Full Name:</strong>
+                            {{ $user->name }} {{$user->surname}} {{$user->patronymic}}
+                        </div>
+                        <div class="form-group">
+                            <strong>IIN:</strong>
+                            {{ $user->iin }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Birthday:</strong>
+                            {{ $user->birthday }}
                         </div>
                         <div class="form-group">
                             <strong>Email:</strong>
                             {{ $user->email }}
                         </div>
+                        <div class="form-group">
+                            <strong>Gender:</strong>
+                            {{ $user->gender }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Country && city:</strong>
+                            {{ isset($user->city_id) ? $user->city->title : "-" }}
+                        </div>
+
+                        <div class="form-group">
+                            <strong>Street && house && floor && apartment && index:</strong>
+                            {{ $user->street }}  {{ $user->house }} {{ $user->floor }}  {{ $user->apartment }} {{ $user->index }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Phone:</strong>
+                            {{ $user->phone }}
+                        </div>
+                        <div class="form-group">
+                            <strong>Image:</strong>
+                            @if(isset($user->image))
+                                <img src="{{url("$user->image")}}" width="300px" height="250px">
+                            @else
+                                -
+                            @endif
+                        </div>
+
                     </div>
                 </div>
             </div>

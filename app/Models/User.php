@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
+use App\Models\City;
 
 class User extends Authenticatable
 {
@@ -22,7 +23,22 @@ class User extends Authenticatable
         'email',
         'password',
         'user_role_id',
+        'surname',
+        'patronymic',
+        'iin',
+        'birthday',
+        'city_id',
+        'gender',
+        'street',
+        'house',
+        'floor',
+        'apartment',
+        'index',
+        'phone',
+        'image',
     ];
+
+    protected $guarded = [];
 
     /**
      * The attributes that should be hidden for serialization.
@@ -64,5 +80,10 @@ class User extends Authenticatable
     public function userRole(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(UserRole::class, 'id', 'user_role_id');
+    }
+
+    protected function city()
+    {
+        return $this->hasOne(City::class, 'id', 'city_id');
     }
 }

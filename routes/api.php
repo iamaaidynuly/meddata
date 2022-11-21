@@ -15,10 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+    return new \App\Http\Resources\UserResource($request->user());
 });
 
 
 Route::prefix('V1')->group(function () {
     Route::post('/login', [\App\Http\Controllers\Api\AuthController::class, 'login']);
+    Route::post('/update-user', [\App\Http\Controllers\Api\UserController::class, 'update']);
+    Route::post('/update-image', [\App\Http\Controllers\Api\UserController::class, 'updateImage']);
+    Route::delete('/delete-image', [\App\Http\Controllers\Api\UserController::class, 'deleteImage']);
+
+
+    Route::get('/countries', [\App\Http\Controllers\Api\ApiController::class, 'countries']);
+    Route::get('/cities', [\App\Http\Controllers\Api\ApiController::class, 'cities']);
 });
