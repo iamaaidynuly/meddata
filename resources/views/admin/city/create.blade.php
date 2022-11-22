@@ -14,12 +14,17 @@
                 <div class="card card-default">
                     <div class="card-header">
                         <span class="card-title">Create City</span>
+                        <div class="float-right">
+                            <a href="{{ route('countries.index') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
+                                {{ __('Back') }}
+                            </a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <form method="POST" action="{{ route('cities.store') }}"  role="form" enctype="multipart/form-data">
                             @csrf
 
-                            @include('city.form')
+                            @include('admin.city.form')
 
                         </form>
                     </div>

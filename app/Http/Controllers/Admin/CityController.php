@@ -1,7 +1,8 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Admin;
 
+use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Country;
 use Illuminate\Http\Request;
@@ -15,31 +16,33 @@ class CityController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function index(Request $request)
     {
-        $cities = City::paginate(15);
+        $cities = City::orderBy('id','desc')->paginate(15);
 
-        return view('city.index', compact('cities'));
+        return view('admin.city.index', compact('cities'));
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function create()
     {
         $city = new City();
-        return view('city.create', compact('city'));
+        $countries = Country::get();
+
+        return view('admin.city.create', compact('city', 'countries'));
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -55,27 +58,28 @@ class CityController extends Controller
      * Display the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function show($id)
     {
         $country = Country::find($id);
-        $cities = City::where('country_id', $id)->paginate(15);
+        $cities = City::where('country_id', $id)->orderBy('id', 'desc')->paginate(10);
 
-        return view('city.index', compact('cities', 'country'));
+        return view('admin.city.index', compact('cities', 'country'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  int $id
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
      */
     public function edit($id)
     {
         $city = City::find($id);
+        $countries = Country::get();
 
-        return view('city.edit', compact('city'));
+        return view('admin.city.edit', compact('city','countries'));
     }
 
     /**
@@ -83,7 +87,7 @@ class CityController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  City $city
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, City $city)
     {

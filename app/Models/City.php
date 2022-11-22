@@ -24,7 +24,7 @@ class City extends Model
      *
      * @var array
      */
-    protected $fillable = ['title','country_id'];
+    protected $fillable = ['title', 'country_id'];
 
 
     /**
@@ -40,6 +40,6 @@ class City extends Model
      */
     public function users()
     {
-        return $this->hasMany('App\User', 'city_id', 'id');
+        return $this->hasMany(User::class, 'city_id', 'id');
     }
 }

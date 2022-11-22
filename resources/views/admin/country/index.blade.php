@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    City
+    Country
 @endsection
 
 @section('content')
@@ -13,11 +13,12 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('City') }}
+                                {{ __('Country') }}
                             </span>
 
                             <div class="float-right">
-                                <a href="{{ route('cities.create') }}" class="btn btn-primary btn-sm float-right" data-placement="left">
+                                <a href="{{ route('countries.create') }}" class="btn btn-primary btn-sm float-right"
+                                   data-placement="left">
                                     {{ __('Create New') }}
                                 </a>
                             </div>
@@ -35,36 +36,39 @@
                                 <thead class="thead">
                                 <tr>
                                     <th>#</th>
-
                                     <th>Title</th>
-                                    <th>Country</th>
 
                                     <th></th>
                                 </tr>
                                 </thead>
                                 <tbody>
-                                @foreach ($cities as $city)
+                                @foreach ($countries as $country)
                                     <tr>
-                                        <td>{{ $city->id }}</td>
+                                        <td>{{ $country->id  }}</td>
 
-                                        <td>{{ $city->title }}</td>
-                                        <td>{{ $city->country->title }}</td>
+                                        <td>{{ $country->title }}</td>
 
                                         <td>
-                                            <form action="{{ route('cities.destroy',$city->id) }}" method="POST">
+                                            <form action="{{ route('countries.destroy',$country->id) }}" method="POST">
+                                                <a class="btn btn-sm btn-primary "
+                                                   href="{{ route('cities.show',$country->id) }}"><i
+                                                        class="fa fa-fw fa-eye"></i>Cities</a>
                                                 <a class="btn btn-sm btn-success"
-                                                   href="{{ route('cities.edit',$city->id) }}"><i
-                                                            class="fa fa-fw fa-edit"></i></a>
+                                                   href="{{ route('countries.edit',$country->id) }}"><i
+                                                        class="fa fa-fw fa-edit"></i></a>
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm"><i
-                                                            class="fa fa-fw fa-trash"></i></button>
+                                                <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm(&quot;Are you sure for deleting?&quot;)">
+                                                    <i class="fa fa-fw fa-trash"></i></button>
                                             </form>
                                         </td>
                                     </tr>
                                 @endforeach
                                 </tbody>
                             </table>
+                            <div class="d-flex justify-content-center">
+                                {{ $countries->links() }}
+                            </div>
                         </div>
                     </div>
                 </div>

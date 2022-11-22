@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('template_title')
-    Country
+    User Role
 @endsection
 
 @section('content')
@@ -13,11 +13,11 @@
                         <div style="display: flex; justify-content: space-between; align-items: center;">
 
                             <span id="card_title">
-                                {{ __('Country') }}
+                                {{ __('User Role') }}
                             </span>
 
                              <div class="float-right">
-                                <a href="{{ route('countries.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
+                                <a href="{{ route('user-roles.create') }}" class="btn btn-primary btn-sm float-right"  data-placement="left">
                                   {{ __('Create New') }}
                                 </a>
                               </div>
@@ -36,24 +36,22 @@
                                     <tr>
                                         <th>#</th>
 										<th>Title</th>
-
+										<th>Description</th>
                                         <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($countries as $country)
+                                    @foreach ($userRoles as $userRole)
                                         <tr>
-                                            <td>{{ $country->id  }}</td>
-
-											<td>{{ $country->title }}</td>
-
+                                            <td>{{ $userRole->id }}</td>
+											<td>{{ $userRole->title }}</td>
+											<td>{{ $userRole->description }}</td>
                                             <td>
-                                                <form action="{{ route('countries.destroy',$country->id) }}" method="POST">
-                                                    <a class="btn btn-sm btn-primary " href="{{ route('cities.show',$country->id) }}"><i class="fa fa-fw fa-eye"></i>Cities</a>
-                                                    <a class="btn btn-sm btn-success" href="{{ route('countries.edit',$country->id) }}"><i class="fa fa-fw fa-edit"></i></a>
+                                                <form action="{{ route('user-roles.destroy',$userRole->id) }}" method="POST">
+{{--                                                    <a class="btn btn-sm btn-success" href="{{ route('user-roles.edit',$userRole->id) }}"><i class="fa fa-fw fa-edit"></i></a>--}}
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button>
+{{--                                                    <button type="submit" class="btn btn-danger btn-sm"><i class="fa fa-fw fa-trash"></i></button>--}}
                                                 </form>
                                             </td>
                                         </tr>
@@ -63,7 +61,6 @@
                         </div>
                     </div>
                 </div>
-                {!! $countries->links() !!}
             </div>
         </div>
     </div>

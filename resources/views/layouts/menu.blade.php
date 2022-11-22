@@ -14,28 +14,40 @@
         <i class="nav-icon fas fa-home"></i>
         <p>Main page</p>
     </a>
+    <a href="{{route('user-roles.index')}}" class="nav-link active">
+        <i class="nav-icon fas fa-users"></i>
+        <p>Roles</p>
+    </a>
     <a href="{{route('countries.index')}}" class="nav-link active">
         <i class="nav-icon fas fa-city"></i>
         <p>Countries</p>
     </a>
-    <a href="" class="nav-link active">
-        <i class="nav-icon fas fa-city"></i>
-        <p>Медицинские учреждения</p>
+    <a href="{{route('doctors.index')}}" class="nav-link active">
+        <i class="nav-icon fas fa-users"></i>
+        <p>Doctors</p>
     </a>
-    <form method="get" action="{{route('users.index')}}">
-        @csrf
-        <input type="hidden" value="2" name="type">
-        <button class="nav-link" type="submit">
-            <i class="nav-icon fas fa-users"></i>
-            Doctors
-        </button>
-    </form>
-    <form method="get" action="{{route('users.index')}}">
-        @csrf
-        <input type="hidden" value="3" name="type">
-        <button class="nav-link" type="submit">
-            <i class="nav-icon fas fa-users"></i>
-            Managers
-        </button>
-    </form>
+    <a href="{{route('managers.index')}}" class="nav-link active">
+        <i class="nav-icon fas fa-users"></i>
+        <p>Managers</p>
+    </a>
+    {{--    <a href="" class="nav-link active">--}}
+    {{--        <i class="nav-icon fas fa-city"></i>--}}
+    {{--        <p>Медицинские учреждения</p>--}}
+    {{--    </a>--}}
+    {{--    <form method="get" action="{{route('users.index')}}">--}}
+    {{--        @csrf--}}
+    {{--        <input type="hidden" value="2" name="type">--}}
+    {{--        <button class="nav-link" type="submit">--}}
+    {{--            <i class="nav-icon fas fa-users"></i>--}}
+    {{--            Doctors--}}
+    {{--        </button>--}}
+    {{--    </form>--}}
+    {{--    <form method="get" action="{{route('users.index')}}">--}}
+    {{--        @csrf--}}
+    {{--        <input type="hidden" value="3" name="type">--}}
+    {{--        <button class="nav-link" type="submit">--}}
+    {{--            <i class="nav-icon fas fa-users"></i>--}}
+    {{--            Managers--}}
+    {{--        </button>--}}
+    {{--    </form>--}}
 </li>

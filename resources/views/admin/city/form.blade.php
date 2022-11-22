@@ -1,15 +1,18 @@
 <div class="box box-info padding-1">
     <div class="box-body">
-        
+
         <div class="form-group">
             {{ Form::label('title') }}
             {{ Form::text('title', $city->title, ['class' => 'form-control' . ($errors->has('title') ? ' is-invalid' : ''), 'placeholder' => 'Title']) }}
             {!! $errors->first('title', '<div class="invalid-feedback">:message</div>') !!}
         </div>
         <div class="form-group">
-            {{ Form::label('country_id') }}
-            {{ Form::text('country_id', $city->country_id, ['class' => 'form-control' . ($errors->has('country_id') ? ' is-invalid' : ''), 'placeholder' => 'Country Id']) }}
-            {!! $errors->first('country_id', '<div class="invalid-feedback">:message</div>') !!}
+            <label for="country_id">Choose country:</label>
+            <select class="form-control" id="country_id" name="country_id">
+                @foreach($countries as $country)
+                    <option value="{{$country->id}}" @if($city->country_id == $country->id) selected @endif >{{$country->title}}</option>
+                @endforeach
+            </select>
         </div>
 
     </div>

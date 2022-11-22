@@ -24,5 +24,8 @@ Route::middleware('auth')->group(function () {
 
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
     Route::resource('countries', \App\Http\Controllers\Admin\CountryController::class);
-    Route::resource('cities', \App\Http\Controllers\CityController::class);
+    Route::resource('cities', \App\Http\Controllers\Admin\CityController::class);
+    Route::resource('doctors', \App\Http\Controllers\Admin\DoctorController::class);
+    Route::resource('managers', \App\Http\Controllers\Admin\ManagerController::class);
+    Route::resource('user-roles', \App\Http\Controllers\Admin\UserRoleController::class);
 });

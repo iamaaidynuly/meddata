@@ -2,16 +2,15 @@
 
 namespace App\Http\Controllers\Admin;
 
-use App\Models\Country;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use Illuminate\Support\Facades\Hash;
+use App\Models\UserRole;
+use Illuminate\Http\Request;
+
 /**
- * Class CountryController
- * @package App\Http\Controllers\Admin
+ * Class UserRoleController
+ * @package App\Http\Controllers
  */
-class CountryController extends Controller
+class UserRoleController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,9 +19,9 @@ class CountryController extends Controller
      */
     public function index()
     {
-        $countries = Country::orderBy('id', 'desc')->paginate(15);
+        $userRoles = UserRole::where('id', '!=', 1)->paginate(15);
 
-        return view('admin.country.index', compact('countries'));
+        return view('admin.user-role.index', compact('userRoles'));
     }
 
     /**
@@ -32,8 +31,8 @@ class CountryController extends Controller
      */
     public function create()
     {
-        $country = new Country();
-        return view('admin.country.create', compact('country'));
+        $userRole = new UserRole();
+        return view('admin.user-role.create', compact('userRole'));
     }
 
     /**
@@ -44,12 +43,12 @@ class CountryController extends Controller
      */
     public function store(Request $request)
     {
-        request()->validate(Country::$rules);
+        request()->validate(UserRole::$rules);
 
-        $country = Country::create($request->all());
+        $userRole = UserRole::create($request->all());
 
-        return redirect()->route('countries.index')
-            ->with('success', 'Country created successfully.');
+        return redirect()->route('user-roles.index')
+            ->with('success', 'UserRole created successfully.');
     }
 
     /**
@@ -60,9 +59,9 @@ class CountryController extends Controller
      */
     public function show($id)
     {
-        $country = Country::find($id);
+        $userRole = UserRole::find($id);
 
-        return view('admin.country.show', compact('country'));
+        return view('admin.user-role.show', compact('userRole'));
     }
 
     /**
@@ -73,26 +72,26 @@ class CountryController extends Controller
      */
     public function edit($id)
     {
-        $country = Country::find($id);
+        $userRole = UserRole::find($id);
 
-        return view('admin.country.edit', compact('country'));
+        return view('admin.user-role.edit', compact('userRole'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  Country $country
+     * @param  UserRole $userRole
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function update(Request $request, Country $country)
+    public function update(Request $request, UserRole $userRole)
     {
-        request()->validate(Country::$rules);
+        request()->validate(UserRole::$rules);
 
-        $country->update($request->all());
+        $userRole->update($request->all());
 
-        return redirect()->route('countries.index')
-            ->with('success', 'Country updated successfully');
+        return redirect()->route('user-roles.index')
+            ->with('success', 'UserRole updated successfully');
     }
 
     /**
@@ -102,9 +101,9 @@ class CountryController extends Controller
      */
     public function destroy($id)
     {
-        $country = Country::find($id)->delete();
+        $userRole = UserRole::find($id)->delete();
 
-        return redirect()->route('countries.index')
-            ->with('success', 'Country deleted successfully');
+        return redirect()->route('user-roles.index')
+            ->with('success', 'UserRole deleted successfully');
     }
 }
