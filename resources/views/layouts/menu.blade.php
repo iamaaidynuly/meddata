@@ -34,6 +34,14 @@
         <i class="nav-icon fas fa-user"></i>
         <p>Clients</p>
     </a>
+    <a href="{{route('bad-habits.index')}}" class="nav-link active">
+        <i class="nav-icon fas fa-book"></i>
+        <p>Bad habits</p>
+    </a>
+    <a href="{{route('lifestyles.index')}}" class="nav-link active">
+        <i class="nav-icon fas fa-book-reader"></i>
+        <p>Lifestyles</p>
+    </a>
     {{--    <a href="" class="nav-link active">--}}
     {{--        <i class="nav-icon fas fa-city"></i>--}}
     {{--        <p>Медицинские учреждения</p>--}}

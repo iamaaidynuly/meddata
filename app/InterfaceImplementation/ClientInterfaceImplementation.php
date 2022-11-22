@@ -2,6 +2,8 @@
 namespace App\InterfaceImplementation;
 use App\Interface\ClientInterface;
 use App\Models\Client;
+use App\Models\ClientBadHabit;
+use App\Models\ClientLifestyle;
 use Illuminate\Support\Facades\Hash;
 
 class ClientInterfaceImplementation implements ClientInterface
@@ -11,7 +13,7 @@ class ClientInterfaceImplementation implements ClientInterface
     */
     public function register(array $data)
     {
-        return Client::create([
+        $client = Client::create([
             'name'  =>  $data['name'],
             'surname'  =>  $data['surname'],
             'login'  =>  $data['login'],
@@ -22,5 +24,19 @@ class ClientInterfaceImplementation implements ClientInterface
             'password'  =>  Hash::make($data['password']),
             'app'  =>  Client::TYPE_GET_WELL
         ]);
+        foreach ($data['bad_habits'] as $habit) {
+            ClientBadHabit::insert([
+                'bad_habit_id'  =>  $habit,
+                'client_id' =>  $client->id,
+            ]);
+        }
+        foreach ($data['lifestyles'] as $lifestyle) {
+            ClientLifestyle::insert([
+                'lifestyle_id'  =>  $lifestyle,
+                'client_id' =>  $client->id,
+            ]);
+        }
+
+        return $client;
     }
 }

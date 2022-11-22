@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api\V1\Client;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\ClientLoginRequest;
 use App\Http\Requests\ClientRegisterRequest;
+use App\Http\Resources\ClientResource;
 use App\Models\Client;
 use App\Service\ClientService;
 use Illuminate\Http\Request;
@@ -39,5 +40,12 @@ class AuthController extends Controller
             'message'   =>  'Successfully login!',
             'token' =>  $token,
         ],201);
+    }
+
+    public function get(Request $request)
+    {
+        return response()->json([
+            'data'  =>  new ClientResource(auth()->user()),
+        ]);
     }
 }

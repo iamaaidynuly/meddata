@@ -29,4 +29,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('managers', \App\Http\Controllers\Admin\ManagerController::class);
     Route::resource('clients', \App\Http\Controllers\Admin\ClientController::class);
     Route::resource('user-roles', \App\Http\Controllers\Admin\UserRoleController::class);
+    Route::resource('bad-habits', \App\Http\Controllers\Admin\BadHabitController::class);
+    Route::resource('lifestyles', \App\Http\Controllers\Admin\LifestyleController::class);
 });

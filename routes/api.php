@@ -27,10 +27,16 @@ Route::prefix('V1')->group(function () {
 
     Route::get('/countries', [\App\Http\Controllers\Api\V1\ApiController::class, 'countries']);
     Route::get('/cities', [\App\Http\Controllers\Api\V1\ApiController::class, 'cities']);
+    Route::get('/bad-habits', [\App\Http\Controllers\Api\V1\ApiController::class, 'badHabits']);
+    Route::get('/lifestyles', [\App\Http\Controllers\Api\V1\ApiController::class, 'lifestyles']);
 
     Route::prefix('/get-well')->group(function () {
         Route::post('/register', [\App\Http\Controllers\Api\V1\Client\AuthController::class, 'register']);
         Route::post('/login', [\App\Http\Controllers\Api\V1\Client\AuthController::class, 'login']);
+
+        Route::middleware('auth:sanctum')->group(function () {
+            Route::get('/client-by-token',[\App\Http\Controllers\Api\V1\Client\AuthController::class, 'get']);
+        });
     });
 
 });
