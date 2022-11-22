@@ -37,7 +37,7 @@ class UpdateUserRequest extends FormRequest
             'apartment'      =>  'required',
             'index'      =>  'required',
             'phone'      =>  'required',
-            'image' =>  'required|mimes:jpg,jpeg,png'
+            'image' =>  'mimes:jpg,jpeg,png'
         ];
     }
 }

@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Http\Controllers\Api;
+namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
+use App\Http\Requests\UpdateUserRequest;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
-use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -18,9 +16,11 @@ class UserController extends Controller
     }
 
 
-    public function update(UpdateUserRequest $request)
+    public function update(UpdateUserRequest $request): \Illuminate\Http\JsonResponse
     {
-        $path = $this->uploadImage($request->file('image'));
+        if ($request->hasFile('image')) {
+            $path = $this->uploadImage($request->file('image'));
+        }
         $user = \auth()->user();
         $user->update([
             'city_id'  =>  $request['city_id'],
@@ -44,7 +44,7 @@ class UserController extends Controller
         ],200);
     }
 
-    public function updateImage(Request $request)
+    public function updateImage(Request $request): \Illuminate\Http\JsonResponse
     {
         $request->validate([
             'image' =>  'required|mimes:jpg,jpeg,png'
@@ -59,7 +59,7 @@ class UserController extends Controller
         ]);
     }
 
-    public function deleteImage(Request $request)
+    public function deleteImage(Request $request): \Illuminate\Http\JsonResponse
     {
         $user = \auth()->user();
         $user->update([

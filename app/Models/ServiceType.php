@@ -5,6 +5,24 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * App\Models\ServiceType
+ *
+ * @property int $id
+ * @property string $title
+ * @property int $price
+ * @property \Illuminate\Support\Carbon|null $created_at
+ * @property \Illuminate\Support\Carbon|null $updated_at
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceType newModelQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceType newQuery()
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceType query()
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceType whereCreatedAt($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceType whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceType wherePrice($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceType whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|ServiceType whereUpdatedAt($value)
+ * @mixin \Eloquent
+ */
 class ServiceType extends Model
 {
     use HasFactory;
