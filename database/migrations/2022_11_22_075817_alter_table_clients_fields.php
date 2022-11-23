@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('name')->after('id')->nullable();
             $table->string('surname')->after('name')->nullable();
             $table->string('login')->after('surname')->nullable();
-            $table->dateTime('birthday')->nullable()->after('phone');
+            $table->dateTime('birthday')->nullable()->after('login');
             $table->enum('gender', ['male','female'])->default('male')->after('birthday');
             $table->foreignId('city_id')->after('gender')->nullable()->constrained('cities')->cascadeOnDelete();
             $table->string('image')->after('city_id')->nullable();

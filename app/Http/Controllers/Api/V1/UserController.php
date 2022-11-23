@@ -36,7 +36,7 @@ class UserController extends Controller
             'apartment'      =>  $request['apartment'],
             'index'      =>  $request['index'],
             'phone'      =>  $request['phone'],
-            'image' =>  $path ?? null
+            'image' =>  $path ?? $user->image,
         ]);
 
         return response()->json([
