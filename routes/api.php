@@ -24,6 +24,10 @@ Route::prefix('V1')->group(function () {
     Route::post('/update-user', [\App\Http\Controllers\Api\V1\UserController::class, 'update']);
     Route::post('/update-image', [\App\Http\Controllers\Api\V1\UserController::class, 'updateImage']);
     Route::delete('/delete-image', [\App\Http\Controllers\Api\V1\UserController::class, 'deleteImage']);
+    
+    Route::post('/register', [\App\Http\Controllers\Api\V1\AuthController::class, 'register']);
+    Route::post('/register-clinic', [\App\Http\Controllers\Api\V1\AuthController::class, 'registerClinic']);
+    
 
     Route::get('/countries', [\App\Http\Controllers\Api\V1\ApiController::class, 'countries']);
     Route::get('/cities', [\App\Http\Controllers\Api\V1\ApiController::class, 'cities']);
