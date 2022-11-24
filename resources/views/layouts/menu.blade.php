@@ -30,6 +30,10 @@
         <i class="nav-icon fas fa-users"></i>
         <p>Managers</p>
     </a>
+    <a href="{{route('clinics.index')}}" class="nav-link active">
+        <i class="nav-icon fas fa-users"></i>
+        <p>Clinics</p>
+    </a>
     <a href="{{route('clients.index')}}" class="nav-link active">
         <i class="nav-icon fas fa-user"></i>
         <p>Clients</p>
