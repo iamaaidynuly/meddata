@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api\V1;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\LoginRequest;
+use App\Http\Requests\ManagerRegisterRequest;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 
@@ -26,4 +27,38 @@ class AuthController extends Controller
             'role'  =>  $user->userRole->title,
         ],202);
     }
+
+    public function register(ManagerRegisterRequest $request) {
+        $user = User::create([
+            'name' => 'Ваше имя',
+            'email' => $request->email,
+            'user_role_id' => 3,
+            'password' => Hash::make($request->password),
+        ]);
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'token' =>  $token,
+        ], 201);
+    }
+
+    public function registerClinic(ClinicRegisterRequest $request) {
+
+        $path = $request->file('license_file')->store('licenses');
+        $clinic = Clinic::create([
+            'title' => $request->title,
+            'legal_title' => $request->legal_title,
+            'desc' => 'Описание клиники',
+            'address' => $request->address,
+            'license' => $request->license,
+            'contact' => 'Контакты',
+            'license_file' => $path,
+            'license_date' => date("dd-mm-YYYY", strtotime($request->license_date)),
+            'password' => Hash::make($request->password),
+        ]);
+        return response()->json([
+        ], 201);
+    }
+    
 }
