@@ -24,7 +24,14 @@ class RegisterRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'  =>  'required',
+            'login' =>  'required|unique:clients,login',
+            'birthday'  =>  'date',
+            'city_id'   =>  'required|exists:cities,id',
+            'image'     =>  'file|mimes:jpeg,png,jpg',
+            'password'  =>  'required',
+            'weight'    =>  'required',
+            'height'    =>  'required',
         ];
     }
 }

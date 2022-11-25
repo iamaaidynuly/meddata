@@ -33,6 +33,11 @@ class ClientRegisterRequest extends FormRequest
             'city_id'   =>  'required|exists:cities,id',
             'image'     =>  'file|mimes:jpeg,png,jpg',
             'password'  =>  'required',
+            'nickname'  =>  'required',
+            'office_worker' =>  'required',
+            'weight' =>  'required',
+            'height' =>  'required',
+            'physical_worker' =>  'required',
         ];
     }
 }

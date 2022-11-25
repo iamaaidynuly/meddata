@@ -22,4 +22,9 @@ class ClientService
 
         return true;
     }
+
+    public function createWellit($data)
+    {
+        return (new \App\InterfaceImplementation\ClientInterfaceImplementation)->registerWellit($data);
+    }
 }

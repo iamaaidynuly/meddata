@@ -39,4 +39,18 @@ class ClientInterfaceImplementation implements ClientInterface
 
         return $client;
     }
+
+    public function registerWellit(array $data)
+    {
+        $client = Client::create([
+            'name'  =>  $data['name'],
+            'login'  =>  $data['login'],
+            'birthday'  =>  \Carbon\Carbon::createFromFormat('Y-m-d', $data['birthday']),
+            'city_id'   =>  $data['city_id'],
+            'password'  =>  Hash::make($data['password']),
+            'app'  =>  Client::TYPE_WELLIT
+        ]);
+
+        return $client;
+    }
 }
