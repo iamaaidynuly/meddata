@@ -34,6 +34,10 @@ Route::prefix('V1')->group(function () {
     Route::get('/bad-habits', [\App\Http\Controllers\Api\V1\ApiController::class, 'badHabits']);
     Route::get('/lifestyles', [\App\Http\Controllers\Api\V1\ApiController::class, 'lifestyles']);
 
+    Route::middleware(['auth:sanctum', 'manager'])->prefix('web')->group(function () {
+        Route::post('/doctor-add', [\App\Http\Controllers\Api\V1\ManagerController::class, 'doctorAdd']);
+    });
+
     Route::prefix('/get-well')->group(function () {
         Route::post('/register', [\App\Http\Controllers\Api\V1\Client\AuthController::class, 'register']);
         Route::post('/login', [\App\Http\Controllers\Api\V1\Client\AuthController::class, 'login']);
@@ -44,7 +48,7 @@ Route::prefix('V1')->group(function () {
     });
 
     Route::prefix('/wellit')->group(function () {
-        Route::post('/register', [\App\Http\Controllers\V1\Wellit\AuthController::class, 'register']);
-        Route::post('/login', [\App\Http\Controllers\V1\Wellit\AuthController::class, 'login']);
+        Route::post('/register', [\App\Http\Controllers\Api\V1\Wellit\AuthController::class, 'register']);
+        Route::post('/login', [\App\Http\Controllers\Api\V1\Wellit\AuthController::class, 'login']);
     });
 });
