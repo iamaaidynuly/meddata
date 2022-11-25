@@ -96,6 +96,11 @@ class User extends Authenticatable
         'index',
         'phone',
         'image',
+        'branch_id',
+        'specialization',
+        'category_id',
+        'work_place',
+        'experience',
     ];
 
     protected $guarded = [];
@@ -144,8 +149,13 @@ class User extends Authenticatable
         return $this->hasOne(UserRole::class, 'id', 'user_role_id');
     }
 
-    protected function city()
+    protected function city(): \Illuminate\Database\Eloquent\Relations\HasOne
     {
         return $this->hasOne(City::class, 'id', 'city_id');
+    }
+
+    protected function schedules(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(UserSchedule::class, 'user_id', 'id');
     }
 }

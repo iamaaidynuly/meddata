@@ -32,4 +32,6 @@ Route::middleware('auth')->group(function () {
     Route::resource('user-roles', \App\Http\Controllers\Admin\UserRoleController::class);
     Route::resource('bad-habits', \App\Http\Controllers\Admin\BadHabitController::class);
     Route::resource('lifestyles', \App\Http\Controllers\Admin\LifestyleController::class);
+    Route::resource('user-schedules', \App\Http\Controllers\Admin\UserScheduleController::class);
+    Route::resource('doctor-specializations', \App\Http\Controllers\Admin\DoctorSpecialization::class);
 });

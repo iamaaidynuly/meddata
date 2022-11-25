@@ -21,7 +21,11 @@
             </div>
         </div>
     </section>
-
+    @if ($message = Session::get('success'))
+        <div class="alert alert-success">
+            <p>{{ $message }}</p>
+        </div>
+    @endif
     <section class="content">
         <div class="container-fluid">
             <div class="row">
@@ -31,10 +35,11 @@
                         <div class="card-body box-profile">
                             <div class="text-center">
                                 @if(isset($user->image))
-                                <img class="profile-user-img img-fluid img-circle"
-                                     src="{{url("$user->image")}}" alt="User profile picture">
+                                    <img class="profile-user-img img-fluid img-circle"
+                                         src="{{url("$user->image")}}" alt="User profile picture">
                                 @else
-                                    <img class="profile-user-img img-fluid img-circle" src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
+                                    <img class="profile-user-img img-fluid img-circle"
+                                         src="../../dist/img/user4-128x128.jpg" alt="User profile picture">
                                 @endif
                             </div>
                             <h3 class="profile-username text-center">{{$user->name}} {{$user->surname}} {{$user->patronymic}}</h3>
@@ -94,7 +99,8 @@
                             <ul class="nav nav-pills">
                                 <li class="nav-item"><a class="nav-link active" href="#activity" data-toggle="tab">Activity</a>
                                 </li>
-                                <li class="nav-item"><a class="nav-link" href="#timeline" data-toggle="tab">Timeline</a>
+                                <li class="nav-item"><a class="nav-link" href="#timeline"
+                                                        data-toggle="tab">Schedules</a>
                                 </li>
                                 <li class="nav-item"><a class="nav-link" href="#settings" data-toggle="tab">Settings</a>
                                 </li>
@@ -223,91 +229,37 @@
                                 </div>
 
                                 <div class="tab-pane" id="timeline">
-
-                                    <div class="timeline timeline-inverse">
-
-                                        <div class="time-label">
-<span class="bg-danger">
-10 Feb. 2014
-</span>
-                                        </div>
-
-
-                                        <div>
-                                            <i class="fas fa-envelope bg-primary"></i>
-                                            <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> 12:05</span>
-                                                <h3 class="timeline-header"><a href="#">Support Team</a> sent you an
-                                                    email</h3>
-                                                <div class="timeline-body">
-                                                    Etsy doostang zoodles disqus groupon greplin oooj voxy zoodles,
-                                                    weebly ning heekya handango imeem plugg dopplr jibjab, movity
-                                                    jajah plickers sifteo edmodo ifttt zimbra. Babblely odeo kaboodle
-                                                    quora plaxo ideeli hulu weebly balihoo...
-                                                </div>
-                                                <div class="timeline-footer">
-                                                    <a href="#" class="btn btn-primary btn-sm">Read more</a>
-                                                    <a href="#" class="btn btn-danger btn-sm">Delete</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div>
-                                            <i class="fas fa-user bg-info"></i>
-                                            <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> 5 mins ago</span>
-                                                <h3 class="timeline-header border-0"><a href="#">Sarah Young</a>
-                                                    accepted your friend request
-                                                </h3>
-                                            </div>
-                                        </div>
-
-
-                                        <div>
-                                            <i class="fas fa-comments bg-warning"></i>
-                                            <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> 27 mins ago</span>
-                                                <h3 class="timeline-header"><a href="#">Jay White</a> commented on your
-                                                    post</h3>
-                                                <div class="timeline-body">
-                                                    Take me to your leader!
-                                                    Switzerland is small and neutral!
-                                                    We are more like Germany, ambitious and misunderstood!
-                                                </div>
-                                                <div class="timeline-footer">
-                                                    <a href="#" class="btn btn-warning btn-flat btn-sm">View comment</a>
-                                                </div>
-                                            </div>
-                                        </div>
-
-
-                                        <div class="time-label">
-<span class="bg-success">
-3 Jan. 2014
-</span>
-                                        </div>
-
-
-                                        <div>
-                                            <i class="fas fa-camera bg-purple"></i>
-                                            <div class="timeline-item">
-                                                <span class="time"><i class="far fa-clock"></i> 2 days ago</span>
-                                                <h3 class="timeline-header"><a href="#">Mina Lee</a> uploaded new photos
-                                                </h3>
-                                                <div class="timeline-body">
-                                                    <img src="https://placehold.it/150x100" alt="...">
-                                                    <img src="https://placehold.it/150x100" alt="...">
-                                                    <img src="https://placehold.it/150x100" alt="...">
-                                                    <img src="https://placehold.it/150x100" alt="...">
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <div>
-                                            <i class="far fa-clock bg-gray"></i>
-                                        </div>
+                                    <div class="float-right">
+                                        <form method="get" action="{{route('user-schedules.create')}}">
+                                            @csrf
+                                            <input type="hidden" name="user_id" value="{{$user->id}}">
+                                            <button class="btn btn-sm btn-success" type="submit">Add Schedule</button>
+                                        </form>
                                     </div>
+                                    <br>
+                                    <br>
+                                    @foreach($schedules as $schedule)
+                                        <div class="timeline timeline-inverse">
+                                            <div>
+                                                <i class="fas fa-clock bg-primary"></i>
+                                                <div class="timeline-item">
+                                                    <span class="time"><i class="far fa-clock"></i>{{$schedule->day}}</span>
+                                                    <h3 class="timeline-header"><a href="#">{{$schedule->day}}</a></h3>
+                                                    <div class="timeline-body">
+                                                        From {{$schedule->start_time}} to {{$schedule->end_time}}
+                                                    </div>
+                                                    <div class="timeline-footer">
+                                                        <form method="post" action="{{route('user-schedules.destroy',$schedule->id)}}">
+                                                            @csrf
+                                                            @method('delete')
+                                                            <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    @endforeach
+
                                 </div>
 
                                 <div class="tab-pane" id="settings">

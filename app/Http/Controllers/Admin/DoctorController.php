@@ -65,8 +65,9 @@ class DoctorController extends Controller
     public function show($id)
     {
         $user = User::find($id);
+        $schedules = $user->schedules;
 
-        return view('admin.doctor.show', compact('user'));
+        return view('admin.doctor.show', compact('user', 'schedules'));
     }
 
     /**

@@ -52,6 +52,8 @@
                                         <td>{{ $user->email }}</td>
                                         <td>
                                             <form action="{{ route('doctors.destroy',$user->id) }}" method="POST">
+                                                <a class="btn btn-sm btn-warning "
+                                                   href="{{ route('doctor-specializations.edit',$user->id) }}">Specializations</a>
                                                 <a class="btn btn-sm btn-primary "
                                                    href="{{ route('doctors.show',$user->id) }}"><i
                                                         class="fa fa-fw fa-eye"></i></a>
